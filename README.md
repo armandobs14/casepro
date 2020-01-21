@@ -7,3 +7,10 @@ Case management dashboard for UNICEF and partner organizations. Supports use of 
 
 For documentation see the [project wiki](https://github.com/rapidpro/casepro/wiki) which includes essential 
 information for both developers and administrators.
+
+## Running
+use docker-compose to execute this project locally.
+
+```sh
+docker-compose up -d
+```
