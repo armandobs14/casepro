@@ -1,0 +1,41 @@
+version: "3"
+
+services: 
+    postgres:
+        image: postgres
+        container_name: postgres
+        ports:
+            - "5432:5432"
+            # - "3456:3456"
+        environment: 
+            POSTGRES_PASSWORD: "nyaruka"
+            POSTGRES_USER: "casepro"
+            POSTGRES_DB: "casepro"
+        volumes:
+          - postgres_data:/var/lib/postgresql/data
+    redis:
+        image: redis
+        container_name: redis
+        # ports:
+            # - "6379:6379"
+        volumes:
+          - redis_data:/data
+    casepro:
+        build: ./
+        image: casepro
+        container_name: casepro
+        environment: 
+            POSTGRES_PASSWORD: "nyaruka"
+            POSTGRES_USER: "casepro"
+            POSTGRES_DB: "casepro"
+            POSTGRES_HOST: "postgres"
+            POSTGRES_PORT: "5432"
+        depends_on: 
+            - postgres
+            - redis
+        ports:
+            - "80:8000"
+
+volumes:
+    postgres_data:
+    redis_data:
